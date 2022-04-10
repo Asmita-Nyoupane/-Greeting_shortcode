@@ -49,8 +49,7 @@ while ( $query->have_posts() ) :
                     $postId=get_the_ID();
 echo  '<a href="'.get_permalink($postId).'">  '. get_the_title() . '</a></br>';
                 endwhile;
-                echo 'Happy birthday ';
-                echo '</p>';
+           echo '</p>';
                 wp_reset_postdata();
             endif;
 ?>
@@ -58,7 +57,6 @@ echo  '<a href="'.get_permalink($postId).'">  '. get_the_title() . '</a></br>';
     </div>
     <?php
     $content = ob_get_clean();
-    //ob_end_clean();
 return $content;
 
 }
