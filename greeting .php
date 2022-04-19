@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Greeting Template
+ * Plugin Name: Greetings Template
  * Plugin URI:www.wordpress.org login
  * Author: Asmita Nyoupane
  * Author URI:https://www.facebook.com/ashmita.neupane.104/
@@ -13,29 +13,32 @@
 
 add_action('init', 'custom_post_type');
 function custom_post_type(){
-    register_post_type('greeting', $args=array(
-        'label' => 'Greeting Template',
+    register_post_type('greetings', $args=array(
+        'label' => 'Greetings Template',
         'public' => true,
         'menu_icon' => 'dashicons-editor-ul',
         'show_ui' => true,
         'show_in_nav_menus' => true,
-        'name' => 'Greeting Template',
-        'description' => 'This is our custom post type'
+        'name' => 'Greetings Template',
+        'description' => 'This is our custom post type',
+        'has_archive'=> true,
+        'rewrite'=>null,
+     
 
     ));
 }
-add_shortcode('greet_temp', 'shortcode_greeting');
+add_shortcode('greet_temp', 'shortcode_greetings');
 
 
-function Shortcode_greeting(){
+function Shortcode_greetings(){
     ob_start();
     ?>
     <div class="greeting-wrapper">
-        <h2> My Greeting Card</h2>
+        <h2> My Greetings Card</h2>
         <div class="greeting_temp">
             <?php
             $args=array(
-                'post_type' => 'greeting',
+                'post_type' => 'greetings',
                 'posts_per_page' => -1,
                 'post_status' => 'publish',
             );
@@ -49,7 +52,7 @@ while ( $query->have_posts() ) :
                     $postId=get_the_ID();
 echo  '<a href="'.get_permalink($postId).'">  '. get_the_title() . '</a></br>';
                 endwhile;
-           echo '</p>';
+                echo '</p>';
                 wp_reset_postdata();
             endif;
 ?>
@@ -57,6 +60,7 @@ echo  '<a href="'.get_permalink($postId).'">  '. get_the_title() . '</a></br>';
     </div>
     <?php
     $content = ob_get_clean();
+
 return $content;
 
 }
